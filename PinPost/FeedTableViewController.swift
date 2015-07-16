@@ -18,79 +18,8 @@ class FeedTableViewController: UITableViewController, InstagramAPIDelegate {
     private var indexPathToReturnTo: NSIndexPath? // the index the table list should return to 
                                                     // after loading more feeds
     
-    @IBAction func pinToBoard(sender: AnyObject) {
-        
-        if let managedObjectContext = (UIApplication.sharedApplication().delegate as!
-            AppDelegate).managedObjectContext {
-            
-            let fetchRequest = NSFetchRequest(entityName: "Board")
-            fetchRequest.predicate = NSPredicate(format: "(type = %@)", "Food")
-            
-            var error: NSError?
-            var foodBoards = managedObjectContext.executeFetchRequest(fetchRequest, error: &error) as! [Board]
-            
-            if error != nil {
-                NSLog(error!.localizedDescription)
-            }
-            // No error with fetch request so continue on with logic
-            else {
-                
-                var foodBoard:Board!
-                
-                // food board doesn't exist so create one first
-                if foodBoards.count == 0 {
-
-                    // Create entity for Board
-                    let board = NSEntityDescription.insertNewObjectForEntityForName("Board", inManagedObjectContext: managedObjectContext) as! Board
-                    board.type = "Food"
-                    foodBoard = board
-                }
-                else {
-                    foodBoard = foodBoards[0] as Board
-                }
-                
-                // Create entity for Pin
-                let pin = NSEntityDescription.insertNewObjectForEntityForName("Pin", inManagedObjectContext: managedObjectContext) as! Pin
-                
-                // figure which button was clicked
-                let buttonPosition = sender.convertPoint(CGPointZero, toView: self.tableView)
-                let indexPath = tableView.indexPathForRowAtPoint(buttonPosition)
-                
-                // Get the correct feed corresponding to the List
-                let feed:JSON = userFeeds[indexPath!.row]
-                
-                // Set data to FeedTableView Cell
-                if let mediaId:String = feed["id"].string{
-                    pin.mediaId = mediaId
-                }
-                
-                // Set relationship. Because they are inverse relationship so setting the to-one
-                // relationship will automatically set the to-many relationship
-                pin.board = foodBoard
-            }
-            
-            var e: NSError?
-            if managedObjectContext.save(&e) != true {
-                println("insert error: \(e!.localizedDescription)")
-                return
-            }
-            else {
-                let button:UIButton = sender as! UIButton
-                button.enabled = false
-                button.backgroundColor = UIColor.blackColor()
-            }
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
         
         // Pull To Refresh Control
         refreshControl = UIRefreshControl()
@@ -140,6 +69,9 @@ class FeedTableViewController: UITableViewController, InstagramAPIDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
+        
+        self.tabBarController?.tabBar.hidden = false
+        
         if InstagramAPI.sharedInstance.isTokenValid () {
             if userFeeds.count == 0 {
                 getFeed()
@@ -183,11 +115,6 @@ class FeedTableViewController: UITableViewController, InstagramAPIDelegate {
         // Get the correct feed corresponding to the List
         let feed:JSON = userFeeds[indexPath.row]
 
-        // Set data to FeedTableView Cell
-//        if let mediaId:String = feed["id"].string{
-//            cell.mediaId = mediaId
-//        }
-
         // UserName
         let user: Dictionary<String, JSON> = feed["user"].dictionaryValue
         let userName: String = user["username"]!.stringValue
@@ -227,11 +154,9 @@ class FeedTableViewController: UITableViewController, InstagramAPIDelegate {
                 if error == nil {
                     if pins.count > 0 {
                         cell.pinButton.enabled = false
-//                        cell.pinButton.backgroundColor = UIColor.blackColor()
                     }
                     else {
                         cell.pinButton.enabled = true
-//                        cell.pinButton.backgroundColor = UIColor.orangeColor()
                     }
                 }
                 else {

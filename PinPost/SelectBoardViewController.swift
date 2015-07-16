@@ -21,8 +21,66 @@ class SelectBoardViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     @IBAction func addBoard(sender: AnyObject) {
+        var boardNameTextField:UITextField!
+        
+        let actionSheetController = UIAlertController(title: "New Board", message: "Name your new board", preferredStyle: .Alert)
+        
+        let cancelAction:UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        
+        let okAction:UIAlertAction = UIAlertAction(title: "Create", style: .Default, handler: {action -> Void in
+            
+            var newBoardName = boardNameTextField.text
+            
+            self.addPinToBoardWithoutEntity(newBoardName, completion: {() -> Void in
+                actionSheetController.dismissViewControllerAnimated(true, completion: nil)
+                self.dismissViewControllerAnimated(true, completion: nil)
+            })
+        })
+        
+        // Add action
+        actionSheetController.addAction(cancelAction)
+        actionSheetController.addAction(okAction)
+        
+        // Add text field
+        actionSheetController.addTextFieldWithConfigurationHandler { (textField) -> Void in
+            boardNameTextField = textField
+        }
+        
+        self.presentViewController(actionSheetController, animated: true, completion: nil)
     }
     
+    // Add pin to a board
+    // Requires board entity. Completion is called to execute any action that needs to
+    // happen after the managedObjectContext is saved
+    func addPinToBoard(board:Board, completion: (() -> Void)?){
+        
+        if let managedObjectContext = (UIApplication.sharedApplication().delegate as!
+            AppDelegate).managedObjectContext {
+                
+                pinPost?.board = board
+                
+                // Save new pin to core data
+                var error: NSError?
+                if managedObjectContext.save(&error) != true {
+                    NSLog(error!.localizedDescription)
+                }
+                else {
+                    completion?()
+                }
+        }
+    }
+    
+    func addPinToBoardWithoutEntity(boardName:String, completion: (() -> Void)?){
+        
+        if let managedObjectContext = (UIApplication.sharedApplication().delegate as!
+            AppDelegate).managedObjectContext {
+
+            let board = NSEntityDescription.insertNewObjectForEntityForName("Board", inManagedObjectContext: managedObjectContext) as! Board
+            board.type = boardName
+                
+            addPinToBoard(board, completion: completion)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,25 +136,11 @@ class SelectBoardViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-     
-        if let managedObjectContext = (UIApplication.sharedApplication().delegate as!
-        AppDelegate).managedObjectContext {
-            
-            // Get the selected board and set it to pin
-            var selectedBoard = boards[indexPath.row]
-            pinPost?.board = selectedBoard
-            
-            // Save new pin to core data
-            var error: NSError?
-            if managedObjectContext.save(&error) != true {
-                NSLog(error!.localizedDescription)
-            }
-            else {
-                self.dismissViewControllerAnimated(true, completion: nil)
-            }
-        }
-
-        //save the pin to this board and demiss this view
+        var selectedBoard = boards[indexPath.row]
+        
+        addPinToBoard(selectedBoard, completion: { () -> Void in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        })
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
