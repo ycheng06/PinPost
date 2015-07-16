@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Board" representedClassName="PinPost.Board" syncable="YES">
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="pins" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Pin" inverseName="board" inverseEntity="Pin" syncable="YES"/>
+    </entity>
+    <entity name="Pin" representedClassName="PinPost.Pin" syncable="YES">
+        <attribute name="mediaId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="board" maxCount="1" deletionRule="Cascade" destinationEntity="Board" inverseName="pins" inverseEntity="Board" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Pin" positionX="-54" positionY="-9" width="128" height="75"/>
+        <element name="Board" positionX="-36" positionY="18" width="128" height="75"/>
+    </elements>
+</model>

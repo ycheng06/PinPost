@@ -8,12 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		960AF4E21B4EAAC30049583A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960AF4E11B4EAAC30049583A /* AppDelegate.swift */; };
-		960AF4E41B4EAAC30049583A /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960AF4E31B4EAAC30049583A /* MasterViewController.swift */; };
-		960AF4E61B4EAAC30049583A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960AF4E51B4EAAC30049583A /* DetailViewController.swift */; };
 		960AF4E91B4EAAC30049583A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 960AF4E71B4EAAC30049583A /* Main.storyboard */; };
 		960AF4EB1B4EAAC30049583A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 960AF4EA1B4EAAC30049583A /* Images.xcassets */; };
 		960AF4EE1B4EAAC30049583A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 960AF4EC1B4EAAC30049583A /* LaunchScreen.xib */; };
 		960AF4FA1B4EAAC30049583A /* PinPostTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960AF4F91B4EAAC30049583A /* PinPostTests.swift */; };
+		960AF5041B4F6FAC0049583A /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960AF5031B4F6FAC0049583A /* FeedTableViewController.swift */; };
+		960AF5061B4F91C10049583A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960AF5051B4F91C10049583A /* WebViewController.swift */; };
+		96D4FD041B4FA9DC00232F95 /* InstagramAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D4FD031B4FA9DC00232F95 /* InstagramAPI.swift */; };
+		96D4FD061B51420C00232F95 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D4FD051B51420C00232F95 /* FeedTableViewCell.swift */; };
+		96D4FD081B51479B00232F95 /* imageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D4FD071B51479B00232F95 /* imageViewExtension.swift */; };
+		96EE600A1B5490C30012FB23 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 96EE60081B5490C30012FB23 /* DataModel.xcdatamodeld */; };
+		96EE60111B5499750012FB23 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EE60101B5499750012FB23 /* Pin.swift */; };
+		96EE60131B5499D20012FB23 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EE60121B5499D20012FB23 /* Board.swift */; };
+		96EE60151B566B6B0012FB23 /* SelectBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EE60141B566B6B0012FB23 /* SelectBoardViewController.swift */; };
+		96EE60191B56860D0012FB23 /* BoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EE60181B56860D0012FB23 /* BoardTableViewCell.swift */; };
+		F6613DA3EF14D985DE862E01 /* Pods_PinPost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 912EE4013B53617127592576 /* Pods_PinPost.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,17 +36,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		45092A89B2EBF850F81E0146 /* Pods-PinPost.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PinPost.release.xcconfig"; path = "Pods/Target Support Files/Pods-PinPost/Pods-PinPost.release.xcconfig"; sourceTree = "<group>"; };
+		912EE4013B53617127592576 /* Pods_PinPost.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PinPost.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		960AF4DC1B4EAAC30049583A /* PinPost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PinPost.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		960AF4E01B4EAAC30049583A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		960AF4E11B4EAAC30049583A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		960AF4E31B4EAAC30049583A /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
-		960AF4E51B4EAAC30049583A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		960AF4E81B4EAAC30049583A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		960AF4EA1B4EAAC30049583A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		960AF4ED1B4EAAC30049583A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		960AF4F31B4EAAC30049583A /* PinPostTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PinPostTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		960AF4F81B4EAAC30049583A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		960AF4F91B4EAAC30049583A /* PinPostTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinPostTests.swift; sourceTree = "<group>"; };
+		960AF5031B4F6FAC0049583A /* FeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
+		960AF5051B4F91C10049583A /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		96D4FD031B4FA9DC00232F95 /* InstagramAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramAPI.swift; sourceTree = "<group>"; };
+		96D4FD051B51420C00232F95 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
+		96D4FD071B51479B00232F95 /* imageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = imageViewExtension.swift; sourceTree = "<group>"; };
+		96EE60091B5490C30012FB23 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		96EE60101B5499750012FB23 /* Pin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
+		96EE60121B5499D20012FB23 /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		96EE60141B566B6B0012FB23 /* SelectBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectBoardViewController.swift; sourceTree = "<group>"; };
+		96EE60181B56860D0012FB23 /* BoardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardTableViewCell.swift; sourceTree = "<group>"; };
+		A89F409CB521DE375FF2F880 /* Pods-PinPost.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PinPost.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PinPost/Pods-PinPost.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6613DA3EF14D985DE862E01 /* Pods_PinPost.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,12 +79,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		50CDE02D098B07DC1622AE53 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				912EE4013B53617127592576 /* Pods_PinPost.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		960AF4D31B4EAAC30049583A = {
 			isa = PBXGroup;
 			children = (
 				960AF4DE1B4EAAC30049583A /* PinPost */,
 				960AF4F61B4EAAC30049583A /* PinPostTests */,
 				960AF4DD1B4EAAC30049583A /* Products */,
+				F3FB280BB53440FA3CEC89FF /* Pods */,
+				50CDE02D098B07DC1622AE53 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,13 +110,17 @@
 		960AF4DE1B4EAAC30049583A /* PinPost */ = {
 			isa = PBXGroup;
 			children = (
+				96EE60171B5682370012FB23 /* Feed */,
+				96EE60161B5682220012FB23 /* SelectBoard */,
+				96EE600B1B54937B0012FB23 /* Data */,
+				96D4FD021B4FA94800232F95 /* InstagramAPIWrapper */,
 				960AF4E11B4EAAC30049583A /* AppDelegate.swift */,
-				960AF4E31B4EAAC30049583A /* MasterViewController.swift */,
-				960AF4E51B4EAAC30049583A /* DetailViewController.swift */,
 				960AF4E71B4EAAC30049583A /* Main.storyboard */,
 				960AF4EA1B4EAAC30049583A /* Images.xcassets */,
 				960AF4EC1B4EAAC30049583A /* LaunchScreen.xib */,
 				960AF4DF1B4EAAC30049583A /* Supporting Files */,
+				960AF5051B4F91C10049583A /* WebViewController.swift */,
+				96D4FD071B51479B00232F95 /* imageViewExtension.swift */,
 			);
 			path = PinPost;
 			sourceTree = "<group>";
@@ -115,6 +150,51 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		96D4FD021B4FA94800232F95 /* InstagramAPIWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				96D4FD031B4FA9DC00232F95 /* InstagramAPI.swift */,
+			);
+			name = InstagramAPIWrapper;
+			sourceTree = "<group>";
+		};
+		96EE600B1B54937B0012FB23 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				96EE60081B5490C30012FB23 /* DataModel.xcdatamodeld */,
+				96EE60101B5499750012FB23 /* Pin.swift */,
+				96EE60121B5499D20012FB23 /* Board.swift */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		96EE60161B5682220012FB23 /* SelectBoard */ = {
+			isa = PBXGroup;
+			children = (
+				96EE60141B566B6B0012FB23 /* SelectBoardViewController.swift */,
+				96EE60181B56860D0012FB23 /* BoardTableViewCell.swift */,
+			);
+			name = SelectBoard;
+			sourceTree = "<group>";
+		};
+		96EE60171B5682370012FB23 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				960AF5031B4F6FAC0049583A /* FeedTableViewController.swift */,
+				96D4FD051B51420C00232F95 /* FeedTableViewCell.swift */,
+			);
+			name = Feed;
+			sourceTree = "<group>";
+		};
+		F3FB280BB53440FA3CEC89FF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A89F409CB521DE375FF2F880 /* Pods-PinPost.debug.xcconfig */,
+				45092A89B2EBF850F81E0146 /* Pods-PinPost.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -122,9 +202,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 960AF4FD1B4EAAC30049583A /* Build configuration list for PBXNativeTarget "PinPost" */;
 			buildPhases = (
+				A64A33AED4E41EE0D74F7643 /* Check Pods Manifest.lock */,
 				960AF4D81B4EAAC30049583A /* Sources */,
 				960AF4D91B4EAAC30049583A /* Frameworks */,
 				960AF4DA1B4EAAC30049583A /* Resources */,
+				4BF64D3D9B6B0309E2D9ACDF /* Embed Pods Frameworks */,
+				ED728365EDFD57D298118562 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -164,6 +247,7 @@
 				TargetAttributes = {
 					960AF4DB1B4EAAC30049583A = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = H277RM8F6V;
 					};
 					960AF4F21B4EAAC30049583A = {
 						CreatedOnToolsVersion = 6.4;
@@ -210,14 +294,70 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4BF64D3D9B6B0309E2D9ACDF /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PinPost/Pods-PinPost-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A64A33AED4E41EE0D74F7643 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		ED728365EDFD57D298118562 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PinPost/Pods-PinPost-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		960AF4D81B4EAAC30049583A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				960AF4E61B4EAAC30049583A /* DetailViewController.swift in Sources */,
-				960AF4E41B4EAAC30049583A /* MasterViewController.swift in Sources */,
+				96EE60191B56860D0012FB23 /* BoardTableViewCell.swift in Sources */,
+				96D4FD061B51420C00232F95 /* FeedTableViewCell.swift in Sources */,
+				96D4FD041B4FA9DC00232F95 /* InstagramAPI.swift in Sources */,
+				96EE60131B5499D20012FB23 /* Board.swift in Sources */,
+				96EE60151B566B6B0012FB23 /* SelectBoardViewController.swift in Sources */,
+				96D4FD081B51479B00232F95 /* imageViewExtension.swift in Sources */,
+				96EE60111B5499750012FB23 /* Pin.swift in Sources */,
 				960AF4E21B4EAAC30049583A /* AppDelegate.swift in Sources */,
+				96EE600A1B5490C30012FB23 /* DataModel.xcdatamodeld in Sources */,
+				960AF5041B4F6FAC0049583A /* FeedTableViewController.swift in Sources */,
+				960AF5061B4F91C10049583A /* WebViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,21 +482,27 @@
 		};
 		960AF4FE1B4EAAC30049583A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A89F409CB521DE375FF2F880 /* Pods-PinPost.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PinPost/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
 		960AF4FF1B4EAAC30049583A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45092A89B2EBF850F81E0146 /* Pods-PinPost.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PinPost/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -413,6 +559,7 @@
 				960AF4FF1B4EAAC30049583A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		960AF5001B4EAAC30049583A /* Build configuration list for PBXNativeTarget "PinPostTests" */ = {
 			isa = XCConfigurationList;
@@ -421,8 +568,22 @@
 				960AF5021B4EAAC30049583A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		96EE60081B5490C30012FB23 /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				96EE60091B5490C30012FB23 /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 96EE60091B5490C30012FB23 /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 960AF4D41B4EAAC30049583A /* Project object */;
 }
