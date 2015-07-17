@@ -14,6 +14,8 @@
 		960AF4FA1B4EAAC30049583A /* PinPostTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960AF4F91B4EAAC30049583A /* PinPostTests.swift */; };
 		960AF5041B4F6FAC0049583A /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960AF5031B4F6FAC0049583A /* FeedTableViewController.swift */; };
 		960AF5061B4F91C10049583A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960AF5051B4F91C10049583A /* WebViewController.swift */; };
+		962ACA431B587F0000501A9C /* PinTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962ACA421B587F0000501A9C /* PinTableViewController.swift */; };
+		962ACA451B58842000501A9C /* PinTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962ACA441B58842000501A9C /* PinTableViewCell.swift */; };
 		96D4FD041B4FA9DC00232F95 /* InstagramAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D4FD031B4FA9DC00232F95 /* InstagramAPI.swift */; };
 		96D4FD061B51420C00232F95 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D4FD051B51420C00232F95 /* FeedTableViewCell.swift */; };
 		96D4FD081B51479B00232F95 /* imageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D4FD071B51479B00232F95 /* imageViewExtension.swift */; };
@@ -22,6 +24,7 @@
 		96EE60131B5499D20012FB23 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EE60121B5499D20012FB23 /* Board.swift */; };
 		96EE60151B566B6B0012FB23 /* SelectBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EE60141B566B6B0012FB23 /* SelectBoardViewController.swift */; };
 		96EE60191B56860D0012FB23 /* BoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EE60181B56860D0012FB23 /* BoardTableViewCell.swift */; };
+		96F78DC41B59227A006ECFBE /* PinFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F78DC31B59227A006ECFBE /* PinFeedTableViewController.swift */; };
 		F6613DA3EF14D985DE862E01 /* Pods_PinPost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 912EE4013B53617127592576 /* Pods_PinPost.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -49,6 +52,8 @@
 		960AF4F91B4EAAC30049583A /* PinPostTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinPostTests.swift; sourceTree = "<group>"; };
 		960AF5031B4F6FAC0049583A /* FeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
 		960AF5051B4F91C10049583A /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		962ACA421B587F0000501A9C /* PinTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinTableViewController.swift; sourceTree = "<group>"; };
+		962ACA441B58842000501A9C /* PinTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinTableViewCell.swift; sourceTree = "<group>"; };
 		96D4FD031B4FA9DC00232F95 /* InstagramAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramAPI.swift; sourceTree = "<group>"; };
 		96D4FD051B51420C00232F95 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		96D4FD071B51479B00232F95 /* imageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = imageViewExtension.swift; sourceTree = "<group>"; };
@@ -57,6 +62,7 @@
 		96EE60121B5499D20012FB23 /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		96EE60141B566B6B0012FB23 /* SelectBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectBoardViewController.swift; sourceTree = "<group>"; };
 		96EE60181B56860D0012FB23 /* BoardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardTableViewCell.swift; sourceTree = "<group>"; };
+		96F78DC31B59227A006ECFBE /* PinFeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinFeedTableViewController.swift; sourceTree = "<group>"; };
 		A89F409CB521DE375FF2F880 /* Pods-PinPost.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PinPost.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PinPost/Pods-PinPost.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,6 +127,9 @@
 				960AF4DF1B4EAAC30049583A /* Supporting Files */,
 				960AF5051B4F91C10049583A /* WebViewController.swift */,
 				96D4FD071B51479B00232F95 /* imageViewExtension.swift */,
+				962ACA421B587F0000501A9C /* PinTableViewController.swift */,
+				962ACA441B58842000501A9C /* PinTableViewCell.swift */,
+				96F78DC31B59227A006ECFBE /* PinFeedTableViewController.swift */,
 			);
 			path = PinPost;
 			sourceTree = "<group>";
@@ -348,16 +357,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				96EE60191B56860D0012FB23 /* BoardTableViewCell.swift in Sources */,
+				962ACA431B587F0000501A9C /* PinTableViewController.swift in Sources */,
 				96D4FD061B51420C00232F95 /* FeedTableViewCell.swift in Sources */,
 				96D4FD041B4FA9DC00232F95 /* InstagramAPI.swift in Sources */,
 				96EE60131B5499D20012FB23 /* Board.swift in Sources */,
 				96EE60151B566B6B0012FB23 /* SelectBoardViewController.swift in Sources */,
 				96D4FD081B51479B00232F95 /* imageViewExtension.swift in Sources */,
 				96EE60111B5499750012FB23 /* Pin.swift in Sources */,
+				96F78DC41B59227A006ECFBE /* PinFeedTableViewController.swift in Sources */,
 				960AF4E21B4EAAC30049583A /* AppDelegate.swift in Sources */,
 				96EE600A1B5490C30012FB23 /* DataModel.xcdatamodeld in Sources */,
 				960AF5041B4F6FAC0049583A /* FeedTableViewController.swift in Sources */,
 				960AF5061B4F91C10049583A /* WebViewController.swift in Sources */,
+				962ACA451B58842000501A9C /* PinTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
