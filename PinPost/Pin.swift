@@ -10,6 +10,11 @@ import Foundation
 import CoreData
 
 class Pin:NSManagedObject{
+    @NSManaged var username:String
+    @NSManaged var profilePicture:String
+    @NSManaged var standardImage:String
+    @NSManaged var thumbnail:String
+    @NSManaged var locationName:String?
     @NSManaged var mediaId:String
     @NSManaged var board:Board
 }

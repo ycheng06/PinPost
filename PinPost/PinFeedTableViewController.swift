@@ -7,15 +7,29 @@
 //
 
 import UIKit
+import CoreData
 
 class PinFeedTableViewController: UITableViewController {
     
     var boardType:String!
+    var boardPins:Array<Pin> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext {
         
+            let fetchRequest = NSFetchRequest(entityName: "Board")
+            fetchRequest.predicate = NSPredicate(format:"(type = %@)", self.boardType)
+            
+            var error: NSError?
+            var boards = managedObjectContext.executeFetchRequest(fetchRequest, error: &error) as! [Board]
+            
+            if error == nil {
+                let currentBoard:Board = boards[0]
+                self.boardPins = currentBoard.pins
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,7 +48,7 @@ class PinFeedTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 0
+        return self.boardPins.count
     }
 
 
@@ -42,7 +56,21 @@ class PinFeedTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("feedCell", forIndexPath: indexPath) as! FeedTableViewCell
 
         // Configure the cell...
+        cell.profilePictureImageView.image = nil
+        cell.postImageView.image = nil
         
+        let pin:Pin = boardPins[indexPath.row]
+        
+        cell.userNameLabel.text = pin.username
+        cell.profilePictureImageView.imageFromUrl(pin.profilePicture)
+        cell.profilePictureImageView.layer.cornerRadius = cell.profilePictureImageView.frame.size.width / 2
+        cell.profilePictureImageView.clipsToBounds = true
+        
+        if let locationName:String = pin.locationName {
+            cell.locationLabel.text = locationName
+        }
+        
+        cell.postImageView.imageFromUrl(pin.thumbnail)
 
         return cell
     }

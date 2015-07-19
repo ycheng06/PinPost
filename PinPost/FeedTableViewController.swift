@@ -206,9 +206,28 @@ class FeedTableViewController: UITableViewController, InstagramAPIDelegate {
                 if let mediaId:String = feed["id"].string{
                     pin.mediaId = mediaId
                 }
-                
-                viewController.pinPost = pin
 
+                if let userName: String = feed["user"]["username"].string {
+                    pin.username = userName
+                }
+                
+                if let profilePictureURL: String = feed["user"]["profile_picture"].string {
+                    pin.profilePicture = profilePictureURL
+                }
+                
+                if let locationName:String = feed["location"]["name"].string {
+                    pin.locationName = locationName
+                }
+                
+                if let imageURL:String = feed["images"]["standard_resolution"]["url"].string {
+                    pin.standardImage = imageURL
+                }
+                    
+                if let thumbnailURL:String = feed["images"]["thumbnail"]["url"].string {
+                    pin.thumbnail = thumbnailURL
+                }
+                    
+                viewController.pinPost = pin
             }
         }
     }

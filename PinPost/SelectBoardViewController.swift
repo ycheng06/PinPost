@@ -15,7 +15,6 @@ class SelectBoardViewController: UIViewController, UITableViewDelegate, UITableV
     var boards:[Board] = []
     var pinPost:Pin?
     
-    
     @IBAction func cancel(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }

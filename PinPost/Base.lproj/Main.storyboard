@@ -29,7 +29,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="boardTypeLabel" destination="q1x-BN-oLc" id="ond-ua-LO1"/>
-                                    <segue destination="tAK-F1-8rZ" kind="push" id="Y7v-BK-d4L"/>
+                                    <segue destination="tAK-F1-8rZ" kind="push" identifier="showBoard" id="Y7v-BK-d4L"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
