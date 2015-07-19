@@ -1,17 +1,20 @@
 //
-//  PinTableViewCell.swift
+//  BoardTableViewCell.swift
 //  PinPost
 //
-//  Created by Jason Cheng on 7/17/15.
+//  Created by Jason Cheng on 7/19/15.
 //  Copyright (c) 2015 Jason. All rights reserved.
 //
 
 import UIKit
 
-class PinTableViewCell: UITableViewCell {
+class PinFeedTableViewCell: UITableViewCell {
 
-
-    @IBOutlet weak var boardTypeLabel: UILabel!
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var profilePictureImageView: UIImageView!
+    @IBOutlet weak var postImageView: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -127,9 +127,9 @@ class SelectBoardViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("BoardCell", forIndexPath: indexPath) as! BoardTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("boardCell", forIndexPath: indexPath) as! BoardTableViewCell
         
-        cell.boardNameLabel.text = boards[indexPath.row].type
+        cell.boardTypeLabel.text = boards[indexPath.row].type
         
         return cell
     }
@@ -151,7 +151,7 @@ class SelectBoardViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("headerCell") as! UITableViewCell
         
         return cell
     }

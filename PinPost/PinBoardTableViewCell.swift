@@ -1,5 +1,5 @@
 //
-//  BoardTableViewCell.swift
+//  PinBoardTableViewCell.swift
 //  PinPost
 //
 //  Created by Jason Cheng on 7/19/15.
@@ -8,11 +8,9 @@
 
 import UIKit
 
-class BoardTableViewCell: UITableViewCell {
+class PinBoardTableViewCell: UITableViewCell {
 
     @IBOutlet weak var boardTypeLabel: UILabel!
-    @IBOutlet weak var boardImageView: UIImageView?
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

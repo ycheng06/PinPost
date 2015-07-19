@@ -12,11 +12,12 @@ import CoreData
 class PinFeedTableViewController: UITableViewController {
     
     var boardType:String!
-    var boardPins:Array<Pin> = []
+    var boardPins:[Pin] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Fetch Board and its Pins
         if let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext {
         
             let fetchRequest = NSFetchRequest(entityName: "Board")
@@ -27,7 +28,8 @@ class PinFeedTableViewController: UITableViewController {
             
             if error == nil {
                 let currentBoard:Board = boards[0]
-                self.boardPins = currentBoard.pins
+                self.boardPins = currentBoard.pins.allObjects as! [Pin]
+                println("board count \(self.boardPins.count)")
             }
         }
     }
@@ -53,64 +55,38 @@ class PinFeedTableViewController: UITableViewController {
 
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("feedCell", forIndexPath: indexPath) as! FeedTableViewCell
-
-        // Configure the cell...
+        let cell = tableView.dequeueReusableCellWithIdentifier("pinFeedCell", forIndexPath: indexPath) as! PinFeedTableViewCell
+        
+        // Reset image views so old images don't show up in reused cell
         cell.profilePictureImageView.image = nil
         cell.postImageView.image = nil
         
-        let pin:Pin = boardPins[indexPath.row]
-        
-        cell.userNameLabel.text = pin.username
-        cell.profilePictureImageView.imageFromUrl(pin.profilePicture)
-        cell.profilePictureImageView.layer.cornerRadius = cell.profilePictureImageView.frame.size.width / 2
-        cell.profilePictureImageView.clipsToBounds = true
-        
-        if let locationName:String = pin.locationName {
-            cell.locationLabel.text = locationName
+        if self.boardPins.count > 0 {
+            let pin:Pin = self.boardPins[indexPath.row] as Pin
+            
+            // Set user name and user profile picture
+            cell.userNameLabel.text = pin.username
+            cell.profilePictureImageView.imageFromUrl(pin.profilePicture)
+            cell.profilePictureImageView.layer.cornerRadius = cell.profilePictureImageView.frame.size.width / 2
+            cell.profilePictureImageView.clipsToBounds = true
+            
+            // Set lcoationLabel. Only show if location data is provided
+            if let locationName:String = pin.locationName {
+                cell.locationLabel.text = locationName
+                cell.locationLabel.hidden = false
+            }
+            else {
+                cell.locationLabel.hidden = true
+            }
+            
+            // Load the post image asynchronously
+            cell.postImageView.imageFromUrl(pin.standardImage)
         }
         
-        cell.postImageView.imageFromUrl(pin.thumbnail)
-
         return cell
     }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
+       /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

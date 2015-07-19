@@ -11,5 +11,5 @@ import CoreData
 
 class Board:NSManagedObject {
     @NSManaged var type:String
-    @NSManaged var pins:Array<Pin>
+    @NSManaged var pins:NSSet
 }

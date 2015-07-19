@@ -5,30 +5,36 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Pin Table View Controller-->
+        <!--Board Table View Controller-->
         <scene sceneID="XGI-T5-LbF">
             <objects>
-                <tableViewController id="QLg-Sn-0nt" customClass="PinTableViewController" customModule="PinPost" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="QLg-Sn-0nt" customClass="BoardTableViewController" customModule="PinPost" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="74" sectionHeaderHeight="22" sectionFooterHeight="22" id="wQU-qM-rm9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="pinCell" rowHeight="74" id="bAx-vb-2uG" customClass="PinTableViewCell" customModule="PinPost" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="pinBoardCell" rowHeight="74" id="bAx-vb-2uG" customClass="PinBoardTableViewCell" customModule="PinPost" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bAx-vb-2uG" id="dZM-6L-pM4">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q1x-BN-oLc">
-                                            <rect key="frame" x="92" y="8" width="103" height="57"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="board type" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q1x-BN-oLc">
+                                            <rect key="frame" x="80" y="8" width="126" height="57"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="25"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="q1x-BN-oLc" firstAttribute="top" secondItem="dZM-6L-pM4" secondAttribute="topMargin" id="74g-1s-mLZ"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="q1x-BN-oLc" secondAttribute="trailing" constant="73" id="9r9-XH-dhJ"/>
+                                        <constraint firstItem="q1x-BN-oLc" firstAttribute="leading" secondItem="dZM-6L-pM4" secondAttribute="leadingMargin" constant="72" id="T7X-Pq-WyK"/>
+                                        <constraint firstItem="q1x-BN-oLc" firstAttribute="bottom" secondItem="dZM-6L-pM4" secondAttribute="bottomMargin" id="WUz-SC-Wkh"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="boardTypeLabel" destination="q1x-BN-oLc" id="ond-ua-LO1"/>
+                                    <outlet property="boardTypeLabel" destination="q1x-BN-oLc" id="CjX-ri-Tu3"/>
                                     <segue destination="tAK-F1-8rZ" kind="push" identifier="showBoard" id="Y7v-BK-d4L"/>
                                 </connections>
                             </tableViewCell>
@@ -48,12 +54,12 @@
         <scene sceneID="Q6D-D3-2ph">
             <objects>
                 <tableViewController id="tAK-F1-8rZ" customClass="PinFeedTableViewController" customModule="PinPost" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fs1-ca-YvW">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="415" sectionHeaderHeight="22" sectionFooterHeight="22" id="fs1-ca-YvW">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="feedCell" rowHeight="415" id="U7W-W7-PO9" customClass="FeedTableViewCell" customModule="PinPost" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="pinFeedCell" rowHeight="415" id="U7W-W7-PO9" customClass="PinFeedTableViewCell" customModule="PinPost" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U7W-W7-PO9" id="CiH-Le-ZbX">
@@ -100,10 +106,10 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="locationLabel" destination="vpm-Rf-MJC" id="bpx-J8-kDE"/>
-                                    <outlet property="postImageView" destination="bi2-Wh-KIi" id="qrl-Ck-cWa"/>
-                                    <outlet property="profilePictureImageView" destination="n9I-iG-YIk" id="eph-A2-DNI"/>
-                                    <outlet property="userNameLabel" destination="MID-wg-4yO" id="Omr-Ji-1Wt"/>
+                                    <outlet property="locationLabel" destination="vpm-Rf-MJC" id="PHp-jf-ROu"/>
+                                    <outlet property="postImageView" destination="bi2-Wh-KIi" id="vDQ-WM-xiV"/>
+                                    <outlet property="profilePictureImageView" destination="n9I-iG-YIk" id="1UV-nN-5XJ"/>
+                                    <outlet property="userNameLabel" destination="MID-wg-4yO" id="4jZ-f4-skJ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -242,7 +248,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="HeaderCell" rowHeight="40" id="54S-Mo-g06">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="headerCell" rowHeight="40" id="54S-Mo-g06">
                                         <rect key="frame" x="0.0" y="0.0" width="229" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="54S-Mo-g06" id="qLA-3y-z4L">
@@ -284,7 +290,7 @@
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="0.0" reuseIdentifier="BoardCell" rowHeight="50" id="BsJ-hv-FeG" customClass="BoardTableViewCell" customModule="PinPost" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="0.0" reuseIdentifier="boardCell" rowHeight="50" id="BsJ-hv-FeG" customClass="BoardTableViewCell" customModule="PinPost" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="229" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BsJ-hv-FeG" id="DgT-nC-uYc">
@@ -293,8 +299,8 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vfd-5S-RoX">
                                                     <rect key="frame" x="8" y="8" width="37" height="33"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="board name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iFE-bE-T5r">
-                                                    <rect key="frame" x="53" y="13" width="93" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="board type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iFE-bE-T5r">
+                                                    <rect key="frame" x="53" y="13" width="83" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -303,8 +309,8 @@
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
-                                            <outlet property="boardImageView" destination="DgT-nC-uYc" id="tGS-kU-HAr"/>
-                                            <outlet property="boardNameLabel" destination="iFE-bE-T5r" id="Ze2-f7-OKa"/>
+                                            <outlet property="boardImageView" destination="vfd-5S-RoX" id="Imj-XC-LCm"/>
+                                            <outlet property="boardTypeLabel" destination="iFE-bE-T5r" id="zMS-QG-quX"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
