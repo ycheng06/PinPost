@@ -43,6 +43,7 @@ class FeedTableViewController: UITableViewController, InstagramAPIDelegate {
         self.refreshControl?.endRefreshing()
     }
     
+    // Protocal for InstagramAPI when you get user feed with pagination info
     func didReceivePaginatedFeed(result: AnyObject) {
         var json:JSON = JSON(result)
     
@@ -140,6 +141,8 @@ class FeedTableViewController: UITableViewController, InstagramAPIDelegate {
             cell.postImageView.imageFromUrl(imageURL)
         }
         
+        // Need to check of this media/post has been pinned already. Disable the pin button
+        // if the post has been pinned already
         if let mediaId:String = feed["id"].string{
             if let managedObjectContext = (UIApplication.sharedApplication().delegate as!
                 AppDelegate).managedObjectContext {
@@ -170,7 +173,7 @@ class FeedTableViewController: UITableViewController, InstagramAPIDelegate {
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         
-        // Check if the will display indexPath is the last 
+        // Check if the will display indexPath is the last. If last make request for next page feed
         if indexPath.row == self.userFeeds.count - 1 {
             self.indexPathToReturnTo = indexPath
         
@@ -179,15 +182,16 @@ class FeedTableViewController: UITableViewController, InstagramAPIDelegate {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-            // Get the new view controller using [segue destinationViewController].
-            // Pass the selected object to the new view controller.
 
         if segue.identifier == "showAllBoards" {
             let viewController = segue.destinationViewController as! SelectBoardViewController
     
+            // This setting will make the modal apear over the current view without removing
+            // the current view
             viewController.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
-            self.tabBarController?.tabBar.hidden = true
             
+            // Hide tab bar controller when pinning new post to board
+            self.tabBarController?.tabBar.hidden = true
             
             if let managedObjectContext = (UIApplication.sharedApplication().delegate as!
                 AppDelegate).managedObjectContext {
@@ -197,10 +201,10 @@ class FeedTableViewController: UITableViewController, InstagramAPIDelegate {
                 
                 // figure which button was clicked
                 let buttonPosition = sender!.convertPoint(CGPointZero, toView: self.tableView)
-                let indexPath = tableView.indexPathForRowAtPoint(buttonPosition)
+                let currentIndexPath = tableView.indexPathForRowAtPoint(buttonPosition)
                 
                 // Get the correct feed corresponding to the List
-                let feed:JSON = userFeeds[indexPath!.row]
+                let feed:JSON = userFeeds[currentIndexPath!.row]
                 
                 // Set data to FeedTableView Cell
                 if let mediaId:String = feed["id"].string{
@@ -228,6 +232,20 @@ class FeedTableViewController: UITableViewController, InstagramAPIDelegate {
                 }
                     
                 viewController.pinPost = pin
+                
+                // What to do after the modal view has been dismissed
+                viewController.onDismiss = { (sender:UIViewController, returnObject:AnyObject?) -> Void in
+                    
+                    sender.dismissViewControllerAnimated(true, completion: nil)
+                        
+                    self.tabBarController?.tabBar.hidden = false
+                    var indexPaths:[NSIndexPath] = []
+                    indexPaths.append(currentIndexPath!)
+
+                    // Only reload one cell where the pin button is at
+                    self.tableView.reloadRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Fade)
+                    
+                }
             }
         }
     }

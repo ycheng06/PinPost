@@ -12,8 +12,13 @@ import CoreData
 class SelectBoardViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    var blurEffectView: UIVisualEffectView!
     var boards:[Board] = []
-    var pinPost:Pin?
+    var pinPost: Pin?
+    
+    // Delegate function to be set by the parent that calls this modal view
+    // Will handle the logic when this modal view has been dismissed
+    var onDismiss:((sender:UIViewController, returnObject:AnyObject?) -> Void)?
     
     @IBAction func cancel(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -32,7 +37,6 @@ class SelectBoardViewController: UIViewController, UITableViewDelegate, UITableV
             
             self.addPinToBoardWithoutEntity(newBoardName, completion: {() -> Void in
                 actionSheetController.dismissViewControllerAnimated(true, completion: nil)
-                self.dismissViewControllerAnimated(true, completion: nil)
             })
         })
         
@@ -65,10 +69,12 @@ class SelectBoardViewController: UIViewController, UITableViewDelegate, UITableV
                 }
                 else {
                     completion?()
+                    self.onDismiss?(sender: self, returnObject: nil)
                 }
         }
     }
     
+    // Board entity needs to be created first before saving the pin
     func addPinToBoardWithoutEntity(boardName:String, completion: (() -> Void)?){
         
         if let managedObjectContext = (UIApplication.sharedApplication().delegate as!
@@ -80,6 +86,9 @@ class SelectBoardViewController: UIViewController, UITableViewDelegate, UITableV
             addPinToBoard(board, completion: completion)
         }
     }
+    override func viewDidAppear(animated: Bool) {
+        println(blurEffectView.userInteractionEnabled)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,6 +96,19 @@ class SelectBoardViewController: UIViewController, UITableViewDelegate, UITableV
         // Do any additional setup after loading the view.
         self.tableView.tableFooterView = UIView(frame:
             CGRectZero)
+        
+        self.view.backgroundColor = UIColor.clearColor()
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+        blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.view.bounds
+        
+        // Important to disable user interaction otherwise it conflicts with
+        // the select event for the table view
+        blurEffectView.userInteractionEnabled = false
+        
+        // Insert the blur view underneath the table view so the blue doesn't
+        // block the table
+        self.view.insertSubview(blurEffectView, belowSubview: self.tableView)
         
         if let managedObjectContext = (UIApplication.sharedApplication().delegate as!
             AppDelegate).managedObjectContext {
@@ -137,9 +159,7 @@ class SelectBoardViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var selectedBoard = boards[indexPath.row]
         
-        addPinToBoard(selectedBoard, completion: { () -> Void in
-            self.dismissViewControllerAnimated(true, completion: nil)
-        })
+        addPinToBoard(selectedBoard, completion: nil)
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

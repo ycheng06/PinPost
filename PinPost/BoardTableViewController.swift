@@ -9,9 +9,12 @@
 import UIKit
 import CoreData
 
-class BoardTableViewController: UITableViewController {
+class BoardTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
     var boards:[Board] = []
+    
+    // This controller will help listen to changes in the fetch result in managedObjectContext
+    var fetchResultController:NSFetchedResultsController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,16 +23,21 @@ class BoardTableViewController: UITableViewController {
             AppDelegate).managedObjectContext {
                 
                 let fetchRequest = NSFetchRequest(entityName: "Board")
+                let sortDescriptor = NSSortDescriptor(key:"type", ascending: true)
+                fetchRequest.sortDescriptors = [sortDescriptor]
+                
+                fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+                fetchResultController.delegate = self
                 
                 var error: NSError?
-                var fetchedBoards = managedObjectContext.executeFetchRequest(fetchRequest, error: &error) as! [Board]
+                var fetchedBoards = fetchResultController.performFetch(&error)
                 
                 if error != nil {
                     NSLog(error!.localizedDescription)
                 }
-                    // No error with fetch request so continue on with logic
+                // No error with fetch request so continue on with logic
                 else {
-                    self.boards = fetchedBoards
+                    self.boards = fetchResultController.fetchedObjects as! [Board]
                 }
         }
         
@@ -38,6 +46,33 @@ class BoardTableViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - NSFetchedResultsControllerDelegate 
+    
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        tableView.beginUpdates()
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        
+        switch type {
+        case .Insert:
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        case .Delete:
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+        case .Update:
+            tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+        
+        default:
+            tableView.reloadData()
+        }
+        
+        self.boards = fetchResultController.fetchedObjects as! [Board]
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        tableView.endUpdates()
     }
     
     // MARK: - Table view data source
@@ -71,11 +106,9 @@ class BoardTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
         
         if segue.identifier == "showBoard" {
-            println("what is going on")
             if let indexPath = self.tableView.indexPathForSelectedRow() {
                 let destinationViewController = segue.destinationViewController as! PinFeedTableViewController
-                
-                println(self.boards[indexPath.row].type)
+            
                 destinationViewController.boardType = self.boards[indexPath.row].type
             }
         }

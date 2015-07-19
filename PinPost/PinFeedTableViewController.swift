@@ -13,6 +13,7 @@ class PinFeedTableViewController: UITableViewController {
     
     var boardType:String!
     var boardPins:[Pin] = []
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +30,6 @@ class PinFeedTableViewController: UITableViewController {
             if error == nil {
                 let currentBoard:Board = boards[0]
                 self.boardPins = currentBoard.pins.allObjects as! [Pin]
-                println("board count \(self.boardPins.count)")
             }
         }
     }
