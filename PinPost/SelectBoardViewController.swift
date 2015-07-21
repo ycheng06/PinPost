@@ -14,14 +14,21 @@ class SelectBoardViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tableView: UITableView!
     var blurEffectView: UIVisualEffectView!
     var boards:[Board] = []
-    var pinPost: Pin?
+    var pinPost: Pin!
+    var managedObjectContext: NSManagedObjectContext!
     
     // Delegate function to be set by the parent that calls this modal view
     // Will handle the logic when this modal view has been dismissed
-    var onDismiss:((sender:UIViewController, returnObject:AnyObject?) -> Void)?
+    var onDismiss:((sender:UIViewController, isCanceled:Bool) -> Void)?
     
     @IBAction func cancel(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        // remove object from the context when the modal is canceled.
+        // Very important line of code. If object is not removed then
+        // there will be a lot of stray objects in the managed context and
+        // will mess up the save method when you actually need to save a 
+        // new object next time
+        self.managedObjectContext.deleteObject(pinPost)
+        self.onDismiss?(sender: self, isCanceled: true)
     }
     
     @IBAction func addBoard(sender: AnyObject) {
@@ -57,37 +64,27 @@ class SelectBoardViewController: UIViewController, UITableViewDelegate, UITableV
     // happen after the managedObjectContext is saved
     func addPinToBoard(board:Board, completion: (() -> Void)?){
         
-        if let managedObjectContext = (UIApplication.sharedApplication().delegate as!
-            AppDelegate).managedObjectContext {
-                
-                pinPost?.board = board
-                
-                // Save new pin to core data
-                var error: NSError?
-                if managedObjectContext.save(&error) != true {
-                    NSLog(error!.localizedDescription)
-                }
-                else {
-                    completion?()
-                    self.onDismiss?(sender: self, returnObject: nil)
-                }
+        self.pinPost?.board = board
+        
+        // Save new pin to core data
+        var error: NSError?
+        if self.managedObjectContext.save(&error) != true {
+            NSLog("error w core data " + error!.localizedDescription)
+        }
+        else {
+            completion?()
+            self.onDismiss?(sender: self, isCanceled: false)
         }
     }
     
     // Board entity needs to be created first before saving the pin
     func addPinToBoardWithoutEntity(boardName:String, completion: (() -> Void)?){
-        
-        if let managedObjectContext = (UIApplication.sharedApplication().delegate as!
-            AppDelegate).managedObjectContext {
 
-            let board = NSEntityDescription.insertNewObjectForEntityForName("Board", inManagedObjectContext: managedObjectContext) as! Board
-            board.type = boardName
-                
-            addPinToBoard(board, completion: completion)
-        }
-    }
-    override func viewDidAppear(animated: Bool) {
-        println(blurEffectView.userInteractionEnabled)
+        let board = NSEntityDescription.insertNewObjectForEntityForName("Board", inManagedObjectContext: self.managedObjectContext) as! Board
+        board.type = boardName
+            
+        addPinToBoard(board, completion: completion)
+
     }
     
     override func viewDidLoad() {
@@ -110,21 +107,17 @@ class SelectBoardViewController: UIViewController, UITableViewDelegate, UITableV
         // block the table
         self.view.insertSubview(blurEffectView, belowSubview: self.tableView)
         
-        if let managedObjectContext = (UIApplication.sharedApplication().delegate as!
-            AppDelegate).managedObjectContext {
-            
-            let fetchRequest = NSFetchRequest(entityName: "Board")
-            
-            var error: NSError?
-            var fetchedBoards = managedObjectContext.executeFetchRequest(fetchRequest, error: &error) as! [Board]
-            
-            if error != nil {
-                NSLog(error!.localizedDescription)
-            }
-            // No error with fetch request so continue on with logic
-            else {
-                self.boards = fetchedBoards
-            }
+        let fetchRequest = NSFetchRequest(entityName: "Board")
+        
+        var error: NSError?
+        var fetchedBoards = self.managedObjectContext.executeFetchRequest(fetchRequest, error: &error) as! [Board]
+        
+        if error != nil {
+            NSLog("fetch error " + error!.localizedDescription)
+        }
+        // No error with fetch request so continue on with logic
+        else {
+            self.boards = fetchedBoards
         }
     }
 
@@ -147,7 +140,6 @@ class SelectBoardViewController: UIViewController, UITableViewDelegate, UITableV
         return boards.count
     }
     
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("boardCell", forIndexPath: indexPath) as! BoardTableViewCell
         
@@ -158,12 +150,12 @@ class SelectBoardViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var selectedBoard = boards[indexPath.row]
-        
+        println("cell selected")
         addPinToBoard(selectedBoard, completion: nil)
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return 60
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

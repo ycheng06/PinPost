@@ -195,6 +195,7 @@ class FeedTableViewController: UITableViewController, InstagramAPIDelegate {
             
             if let managedObjectContext = (UIApplication.sharedApplication().delegate as!
                 AppDelegate).managedObjectContext {
+                    println("preparing for showAllBoards")
                     
                 // Create entity for Pin
                 let pin = NSEntityDescription.insertNewObjectForEntityForName("Pin", inManagedObjectContext: managedObjectContext) as! Pin
@@ -232,19 +233,20 @@ class FeedTableViewController: UITableViewController, InstagramAPIDelegate {
                 }
                     
                 viewController.pinPost = pin
+                viewController.managedObjectContext = managedObjectContext
                 
                 // What to do after the modal view has been dismissed
-                viewController.onDismiss = { (sender:UIViewController, returnObject:AnyObject?) -> Void in
+                viewController.onDismiss = { (sender:UIViewController, isCanceled:Bool) -> Void in
                     
                     sender.dismissViewControllerAnimated(true, completion: nil)
-                        
-                    self.tabBarController?.tabBar.hidden = false
-                    var indexPaths:[NSIndexPath] = []
-                    indexPaths.append(currentIndexPath!)
-
-                    // Only reload one cell where the pin button is at
-                    self.tableView.reloadRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Fade)
                     
+                    
+                    self.tabBarController?.tabBar.hidden = false
+                    
+                    if !isCanceled {
+                        // Only reload one cell where the pin button is at
+                        self.tableView.reloadRowsAtIndexPaths([currentIndexPath!], withRowAnimation: UITableViewRowAnimation.Fade)
+                    }
                 }
             }
         }
